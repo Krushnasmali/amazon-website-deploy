@@ -1,0 +1,1238 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopEase | Online Shopping</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f7f7f8;
+            color: #222;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1250px;
+            margin: auto;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #111;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #ff6b35;
+        }
+
+        .search-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            height: 44px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 0 50px 0 18px;
+            outline: none;
+            font-size: 14px;
+            background: #f8f8f8;
+        }
+
+        .search-container input:focus {
+            border-color: #ff6b35;
+            background: white;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            height: 34px;
+            width: 40px;
+            border: none;
+            border-radius: 6px;
+            background: #ff6b35;
+            color: white;
+            font-size: 17px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-icon {
+            font-size: 21px;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -9px;
+            background: #ff6b35;
+            color: white;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            max-width: 1250px;
+            margin: 25px auto;
+            padding: 0 20px;
+        }
+
+        .hero-box {
+            min-height: 430px;
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 50px;
+            position: relative;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,.75),
+                    rgba(0,0,0,.25)
+                ),
+                url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 550px;
+        }
+
+        .hero-content small {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            color: #ffb08f;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            line-height: 1.05;
+            margin: 15px 0;
+        }
+
+        .hero-content p {
+            font-size: 17px;
+            line-height: 1.6;
+            color: #eee;
+            margin-bottom: 25px;
+        }
+
+        .hero-btn {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .hero-btn:hover {
+            background: #e95421;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section {
+            max-width: 1250px;
+            margin: 55px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .section-header h2 {
+            font-size: 27px;
+        }
+
+        .view-all {
+            color: #ff6b35;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* ================= CATEGORIES ================= */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+        }
+
+        .category {
+            background: white;
+            border: 1px solid #eee;
+            padding: 22px 10px;
+            text-align: center;
+            border-radius: 12px;
+            transition: .25s;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,.08);
+        }
+
+        .category-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .category h3 {
+            font-size: 14px;
+        }
+
+        /* ================= PRODUCTS ================= */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: .25s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,.08);
+        }
+
+        .product-image {
+            height: 230px;
+            overflow: hidden;
+            background: #f2f2f2;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .discount {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #e53935;
+            color: white;
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .wishlist {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: none;
+            background: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 18px;
+        }
+
+        .product-info {
+            padding: 17px;
+        }
+
+        .product-category {
+            color: #888;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            margin: 7px 0;
+        }
+
+        .rating {
+            color: #f5a623;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .current-price {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .old-price {
+            color: #999;
+            font-size: 13px;
+            text-decoration: line-through;
+        }
+
+        .add-cart {
+            width: 100%;
+            padding: 11px;
+            border: none;
+            border-radius: 7px;
+            background: #111;
+            color: white;
+            font-weight: bold;
+        }
+
+        .add-cart:hover {
+            background: #ff6b35;
+        }
+
+        /* ================= PROMO ================= */
+
+        .promo {
+            max-width: 1250px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .promo-box {
+            background: #111;
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .promo-box h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .promo-box p {
+            color: #bbb;
+        }
+
+        .promo-btn {
+            background: #ff6b35;
+            border: none;
+            color: white;
+            padding: 13px 22px;
+            border-radius: 7px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* ================= NEWSLETTER ================= */
+
+        .newsletter {
+            background: #fff;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 45px 20px;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .newsletter p {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: auto;
+            display: flex;
+            gap: 8px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            height: 45px;
+            padding: 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 0 20px;
+            font-weight: bold;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #111;
+            color: white;
+            padding: 50px 20px 20px;
+        }
+
+        .footer-container {
+            max-width: 1250px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-logo {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: #ff6b35;
+        }
+
+        .footer-column p {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 17px;
+            font-size: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 11px;
+        }
+
+        .footer-column a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            max-width: 1250px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #777;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .categories {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .nav-links a:not(.nav-icon) {
+                display: none;
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                gap: 10px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .hero-box {
+                min-height: 400px;
+                padding: 30px;
+            }
+
+            .hero-content h1 {
+                font-size: 38px;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .product-image {
+                height: 190px;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .promo-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form button {
+                height: 45px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .search-container {
+                display: none;
+            }
+
+            .navbar {
+                justify-content: space-between;
+            }
+
+            .hero {
+                padding: 0 10px;
+            }
+
+            .section {
+                padding: 0 10px;
+            }
+
+            .products {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .product-image {
+                height: 150px;
+            }
+
+            .product-info {
+                padding: 12px;
+            }
+
+            .product-info h3 {
+                font-size: 14px;
+            }
+
+            .current-price {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header>
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                Shop<span>Ease</span>
+            </a>
+
+            <div class="search-container">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search products..."
+                >
+
+                <button class="search-btn" onclick="searchProducts()">
+                    🔍
+                </button>
+            </div>
+
+            <div class="nav-links">
+
+                <a href="#">Home</a>
+                <a href="#">Shop</a>
+                <a href="#">Offers</a>
+
+                <a href="#" class="nav-icon">
+                    ♡
+                </a>
+
+                <a href="#" class="nav-icon">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+
+            </div>
+
+        </nav>
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-box">
+
+            <div class="hero-content">
+
+                <small>New Collection 2026</small>
+
+                <h1>
+                    Everything You Need,
+                    All in One Place.
+                </h1>
+
+                <p>
+                    Discover trending products, exclusive deals,
+                    and everyday essentials at prices you'll love.
+                </p>
+
+                <button class="hero-btn" onclick="scrollToProducts()">
+                    Shop Now →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <h2>Shop by Category</h2>
+
+            <a href="#" class="view-all">
+                View All →
+            </a>
+
+        </div>
+
+        <div class="categories">
+
+            <div class="category">
+                <div class="category-icon">👕</div>
+                <h3>Fashion</h3>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">💻</div>
+                <h3>Electronics</h3>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🏠</div>
+                <h3>Home</h3>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">👟</div>
+                <h3>Footwear</h3>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🎧</div>
+                <h3>Accessories</h3>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🎮</div>
+                <h3>Gaming</h3>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PRODUCTS ================= -->
+
+    <section class="section" id="products">
+
+        <div class="section-header">
+
+            <h2>Featured Products</h2>
+
+            <a href="#" class="view-all">
+                View All →
+            </a>
+
+        </div>
+
+        <div class="products" id="productGrid">
+
+            <!-- Product 1 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <span class="discount">
+                        25% OFF
+                    </span>
+
+                    <button class="wishlist">
+                        ♡
+                    </button>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"
+                        alt="T-Shirt"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Fashion
+                    </span>
+
+                    <h3>Premium Cotton T-Shirt</h3>
+
+                    <div class="rating">
+                        ★★★★★
+                    </div>
+
+                    <div class="price">
+
+                        <span class="current-price">
+                            ₹899
+                        </span>
+
+                        <span class="old-price">
+                            ₹1,199
+                        </span>
+
+                    </div>
+
+                    <button class="add-cart" onclick="addToCart()">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 2 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <span class="discount">
+                        18% OFF
+                    </span>
+
+                    <button class="wishlist">
+                        ♡
+                    </button>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80"
+                        alt="Headphones"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Electronics
+                    </span>
+
+                    <h3>Wireless Headphones</h3>
+
+                    <div class="rating">
+                        ★★★★☆
+                    </div>
+
+                    <div class="price">
+
+                        <span class="current-price">
+                            ₹2,499
+                        </span>
+
+                        <span class="old-price">
+                            ₹2,999
+                        </span>
+
+                    </div>
+
+                    <button class="add-cart" onclick="addToCart()">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 3 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <span class="discount">
+                        30% OFF
+                    </span>
+
+                    <button class="wishlist">
+                        ♡
+                    </button>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80"
+                        alt="Shoes"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Footwear
+                    </span>
+
+                    <h3>Running Sneakers</h3>
+
+                    <div class="rating">
+                        ★★★★★
+                    </div>
+
+                    <div class="price">
+
+                        <span class="current-price">
+                            ₹1,799
+                        </span>
+
+                        <span class="old-price">
+                            ₹2,599
+                        </span>
+
+                    </div>
+
+                    <button class="add-cart" onclick="addToCart()">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 4 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <span class="discount">
+                        15% OFF
+                    </span>
+
+                    <button class="wishlist">
+                        ♡
+                    </button>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80"
+                        alt="Watch"
+                    >
+
+                </div>
+
+                <div class="product-info">
+
+                    <span class="product-category">
+                        Accessories
+                    </span>
+
+                    <h3>Classic Smart Watch</h3>
+
+                    <div class="rating">
+                        ★★★★☆
+                    </div>
+
+                    <div class="price">
+
+                        <span class="current-price">
+                            ₹3,999
+                        </span>
+
+                        <span class="old-price">
+                            ₹4,699
+                        </span>
+
+                    </div>
+
+                    <button class="add-cart" onclick="addToCart()">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PROMO ================= -->
+
+    <section class="promo">
+
+        <div class="promo-box">
+
+            <div>
+
+                <h2>Big Sale. Bigger Savings.</h2>
+
+                <p>
+                    Get up to 50% off on selected products.
+                    Limited time offer.
+                </p>
+
+            </div>
+
+            <button class="promo-btn">
+                Explore Deals →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= NEWSLETTER ================= -->
+
+    <section class="newsletter">
+
+        <h2>Stay in the loop</h2>
+
+        <p>
+            Subscribe to get exclusive offers and new product updates.
+        </p>
+
+        <form class="newsletter-form" onsubmit="subscribe(event)">
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <button type="submit">
+                Subscribe
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-container">
+
+            <div class="footer-column">
+
+                <div class="footer-logo">
+                    Shop<span>Ease</span>
+                </div>
+
+                <p>
+                    Your everyday online shopping destination.
+                    Discover quality products, great prices,
+                    and exciting deals.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Shop</h3>
+
+                <a href="#">All Products</a>
+                <a href="#">Fashion</a>
+                <a href="#">Electronics</a>
+                <a href="#">Home & Living</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Customer Care</h3>
+
+                <a href="#">Contact Us</a>
+                <a href="#">Shipping</a>
+                <a href="#">Returns</a>
+                <a href="#">FAQs</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Follow Us</h3>
+
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">YouTube</a>
+                <a href="#">Twitter / X</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 ShopEase. All rights reserved.
+            </span>
+
+            <span>
+                Made for modern shopping 🛍️
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        let cartCount = 0;
+
+
+        function addToCart() {
+
+            cartCount++;
+
+            document.getElementById("cartCount").textContent = cartCount;
+
+            alert("Product added to cart! 🛒");
+
+        }
+
+
+        function scrollToProducts() {
+
+            document.getElementById("products")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        function searchProducts() {
+
+            const searchValue =
+                document.getElementById("searchInput")
+                .value
+                .toLowerCase()
+                .trim();
+
+            const products =
+                document.querySelectorAll(".product-card");
+
+            products.forEach(product => {
+
+                const productName =
+                    product.querySelector("h3")
+                    .textContent
+                    .toLowerCase();
+
+                const category =
+                    product.querySelector(".product-category")
+                    .textContent
+                    .toLowerCase();
+
+                if (
+                    productName.includes(searchValue) ||
+                    category.includes(searchValue)
+                ) {
+
+                    product.style.display = "block";
+
+                } else {
+
+                    product.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+
+        document
+            .getElementById("searchInput")
+            .addEventListener("keyup", function(event) {
+
+                if (event.key === "Enter") {
+                    searchProducts();
+                }
+
+            });
+
+
+        function subscribe(event) {
+
+            event.preventDefault();
+
+            const email =
+                document.getElementById("email").value;
+
+            alert(
+                "Thanks for subscribing! 📧"
+            );
+
+            document.getElementById("email").value = "";
+
+        }
+
+
+        // Wishlist buttons
+
+        document
+            .querySelectorAll(".wishlist")
+            .forEach(button => {
+
+                button.addEventListener("click", function() {
+
+                    if (this.textContent === "♡") {
+
+                        this.textContent = "♥";
+                        this.style.color = "#e53935";
+
+                    } else {
+
+                        this.textContent = "♡";
+                        this.style.color = "#222";
+
+                    }
+
+                });
+
+            });
+
+    </script>
+
+</body>
+</html>
+```
